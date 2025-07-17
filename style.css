@@ -528,7 +528,7 @@ body {
     }
 }
 
-.fa-circle-play:hover {
+.playlist-card .fa-circle-play:hover {
     font-size: 2.2rem;
 }
 
@@ -651,6 +651,139 @@ body {
     /* Optional: adjust line spacing */
     max-height: calc(1.2em * 2);
 }
+
+/* Playlist View */
+.playlist-view {
+    flex-direction: column;
+}
+
+.playlist-view .top-view {
+    gap: 20px;
+    padding: 30px;
+    flex-direction: column;
+
+    background: #de7571;
+background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 1) 90%);
+}
+
+.playlist-data {
+    align-items: center;
+    gap: 20px;
+    color: white;
+}
+
+.playlist-thumbnail {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.playlist-thumbnail img {
+    width: 100%;
+}
+
+.playlist-data .detail {
+    flex-direction: column;
+}
+
+.playlist-data .detail .playlist-name {
+    font-size: 3.2rem;
+    font-weight: 700;
+}
+
+.playlist-tool-box {
+    gap: 20px;
+    align-items: center;
+    color: white;
+}
+
+.current-song-thumbnail-box{
+    width: 40px;
+    height: 50px;
+    overflow: hidden;
+    padding: 3px;
+    border-radius: 6px;
+    border: 1px solid white;
+    /* border: 1px solid red; */
+}
+
+.current-song-thumbnail-box img{
+    object-fit: cover;
+    width: 100%;
+    border-radius: 3px;
+}
+
+.playlist-tool-box .fa-solid {
+    font-size: 2.8rem;
+    cursor: pointer;
+}
+
+.playlist-tool-box .fa-shuffle {
+    font-size: 2rem;
+}
+
+.playlist-view .top-view .popular {
+    font-size: 1.3rem;
+    color: white;
+    font-weight: 700;
+    margin-top: 20px;
+}
+
+.song-list-playlist{
+    /* width: 100%; */
+    border: 1px solid red;
+    padding: 20px;
+    flex-direction: column;
+}
+
+.song-list-playlist .song-card{
+    padding: 10px 15px;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    transition: all 0.2s ease-in-out;
+}
+.song-list-playlist .song-card:hover{
+    background-color: rgba(87, 87, 87, 0.212);
+}
+
+.song-list-playlist .song-card.active{
+    background-color: rgba(87, 87, 87, 0.397);
+}
+
+.song-list-playlist .song-card .song-detail{
+    align-items: center;
+    gap: 20px;
+    color: white;
+}
+
+.song-list-playlist .song-card .song-thumbnail{
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 3px;
+    margin-left: 15px;
+}
+
+.song-card .song-thumbnail img{
+    width: 100%;
+    object-fit: cover;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .now-playing-view {
     background-color: var(--light-bg);
@@ -959,6 +1092,6 @@ body {
     background: white;
 } */
 
-.volume-icon{
+.volume-icon {
     cursor: pointer;
 }

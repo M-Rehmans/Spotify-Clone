@@ -193,14 +193,12 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
             <div class="item-container">
                 <!-- <div class="bg-gradient"> -->
-                <div class="home-secto flex">
+                <div class="home-secto flex" style="display: none;">
                     <div class="bg-gradient-box flex">
                         <div class="h-s-top-btns flex">
                             <button class="h-s-all-items active">All</button>
@@ -342,8 +340,57 @@
                     </div>
                 </div>
                 <!-- </div> -->
-            </div>
 
+                <div class="playlist-view flex">
+                    <div class="top-view flex">
+                        <div class="playlist-data flex">
+                            <div class="playlist-thumbnail"><img src="Media/Momina Mustehsan.jpg" alt=""></div>
+                            <div class="detail flex">
+                                <p class="title">Playlist</p>
+                                <div class="playlist-name">Momina Mostehsan</div>
+                                <p class="lsitners-count">2,344,365 monthly listners</p>
+                            </div>
+                        </div>
+                        <div class="playlist-tool-box flex">
+                            <i class="fa-solid fa-circle-play"></i>
+                            <!-- <i class="fa-solid fa-circle-pause"></i> -->
+                            <div class="current-song-thumbnail-box flex">
+                                <img src="Media/Nasha By Talwinder.jpg" alt="" id="current-song-img">
+                            </div>
+                            <i class="fa-solid fa-shuffle"></i>
+                        </div>
+                        <p class="popular">Popular</p>
+                    </div>
+                    <div class="song-list-playlist flex">
+                        <div class="song-card flex active">
+                            <div class="song-detail flex">
+                                <span class="song-index">1</span>
+                                <!-- <i class="fa-solid fa-play"></i> -->
+                                 <i class="fa-solid fa-pause"></i>
+                                <div class="song-thumbnail flex">
+                                    <img src="Media/Momina Mustehsan.jpg" alt="">
+                                </div>
+                                <p class="song-name">Anwari</p>
+                            </div>
+                            <p class="play-count">97,901,449</p>
+                            <div class="song-duration">5:30</div>
+                        </div>
+
+                        <div class="song-card flex">
+                            <div class="song-detail flex">
+                                <span class="song-index">1</span>
+                                <div class="song-thumbnail flex">
+                                    <img src="Media/Momina Mustehsan.jpg" alt="">
+                                </div>
+                                <p class="song-name">Anwari</p>
+                            </div>
+                            <p class="play-count">97,901,449</p>
+                            <div class="song-duration">5:30</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
             <div class="now-playing-view">
                 <div class="npv-top-nav flex">
@@ -411,9 +458,7 @@
                     <div class="progress-container">
                         <span id="current-time">0:00</span>
                         <div class="progress-box">
-                            <!-- <div class="progress-fill"></div> -->
-                            <!-- <div class="progress-thumb"></div> -->
-                             <input type="range" name="" id="progress-bar" min="0" value="0">
+                            <input type="range" name="" id="progress-bar" min="0" value="0">
                         </div>
                         <span id="total-duration">0:00</span>
                     </div>
@@ -426,13 +471,10 @@
                     <i class="fa-solid fa-bars"></i>
                     <i class="fa-regular fa-message"></i>
                     <i class="volume-icon fa-solid fa-volume-high volume-show"></i>
-                    <!-- <i class="volume-icon fa-solid fa-volume-low"></i> -->
-                    <!-- <i class="volume-icon fa-solid fa-volume-off"></i> -->
                 </div>
 
                 <div class="volume-box">
-                    <!-- <div class="volume-fill"></div> -->
-                     <input type="range" name="" id="volume-bar" min="0" max="100" value="100">
+                    <input type="range" name="" id="volume-bar" min="0" max="100" value="100">
                 </div>
 
                 <div class="icon-group">
@@ -440,7 +482,6 @@
                     <i class="fa-solid fa-expand"></i>
                 </div>
             </div>
-            <p>Tahir Bhai</p>
         </div>
     </div>
     <script src="script.js"></script>
