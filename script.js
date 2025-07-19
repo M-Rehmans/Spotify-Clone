@@ -8,7 +8,21 @@ const currentTimeSpan = document.getElementById("current-time");
 const totalDurationSpan = document.getElementById("total-duration");
 const volumeBar = document.querySelector('#volume-bar');
 const volumIcon = document.querySelector('.volume-icon');
+const homeBtn = document.querySelector('.home-btn')
+const itemContainerItems = document.querySelectorAll('.item-box');
 
+homeBtn.addEventListener('click', ()=>{
+   
+  itemContainerItems.forEach(item=>{
+    if(item.classList.contains('home-secto')){
+        item.style.display = "flex";
+    }
+    else{
+        item.style.display = 'none'
+    }
+  });
+
+})
 
 const musicList = [
     "Media/NASHA.mp3",
