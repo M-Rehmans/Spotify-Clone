@@ -20,10 +20,11 @@ playlistList.forEach((playlistName, index) => {
         // let matchedSinger = singers.find(singer => singer.name.toLowerCase() === playlistName.id.toLowerCase());
         itemContainerItems.forEach(item => {
             if (playlistName.id === item.id) {
-                console.log(item.id);
+                // console.log(item.id);
                 item.classList.add('active');
+                createSongList(item.id);
                 matchFound = true;
-                console.log(matchedSinger.name);
+                // console.log(matchedSinger.name);
             }
         });
         const emptyBox = document.getElementById('Emptyplaylist');
@@ -45,7 +46,7 @@ function itemCardsHide() {
 
 
 // function createSongList(){
-    
+
 // }
 
 const musicList = [
@@ -53,34 +54,70 @@ const musicList = [
     "Media/DO GALLAN.mp3"
 ];
 
-// const singers = [
-//     {
-//         name: 'Atif Aslam',
-//         songs: [
-//             "Media/Woh Lamhe Woh Baatein.mp3",
-//             "Media/Rafta Rafta.mp3",
-//             "Media/Sang-e-Mah.mp3",
-//             "Media/Tum Nazar Mein Raho.mp3",
-//         ]
-//     },
+const singers = [
+    {
+        name: 'Nusrat',
+        songs: [
+            "Media/Jab Karam Hota Hai Halat Badal Jate Hain.mp3",
+            "Media/Othe Amlan De Hony Ne Navede.mp3",
+            "Media/Unke Andaz e karam.mp3",
+            "Media/Aaj Sik Mitran Di.mp3",
+        ]
+    },
 
-//     {
-//         name: 'Nusrat',
-//         songs: [
-//             "Media/Jab Karam Hota Hai Halat Badal Jate Hain.mp3",
-//             "Media/Othe Amlan De Hony Ne Navede.mp3",
-//             "Media/Unke Andaz e karam.mp3",
-//             "Media/Aaj Sik Mitran Di.mp3",
-//         ]
-//     },
+    {
+        name: 'Atif-aslam',
+        songs: [
+            "Media/Woh Lamhe Woh Baatein.mp3",
+            "Media/Rafta Rafta.mp3",
+            "Media/Sang-e-Mah.mp3",
+            "Media/Tum Nazar Mein Raho.mp3",
+        ]
+    },
 
-//     {
-//         name: 'Talwinder',
-//         songs: [
-//             "Media/Nasha.mp3",
-//         ]
-//     }
-// ]
+    {
+        name: 'Talwinder',
+        songs: [
+            "Media/Nasha karda.mp3",
+        ]
+    }
+]
+
+
+
+function renderSongs(songs) {
+    songList.innerHTML = ''; // Clear previous songs
+
+    songs.forEach((song, index) => {
+        const songNameL = song.split('/').pop().replace('.mp3', '');
+        console.log(`Geooo ${songNameL}`);
+        songList.innerHTML += `
+        <div class="song-card flex active">
+            <div class="song-detail flex">
+                <span class="song-index">${index + 1}</span>
+                <i class="fa-solid fa-play"></i>
+                <div class="song-thumbnail flex">
+                    <img src="Media/Momina Mustehsan.jpg" alt="">
+                </div>
+                <p class="song-name">${songNameL}</p>
+            </div>
+            <p class="play-count">97,901,449</p>
+            <div class="song-duration">5:30</div>
+        </div>
+        `;
+    });
+}
+
+
+
+function createSongList(singerid) {
+    const matchedSinger = singers.find(singer => singer.name === singerid);
+    // console.log(matchedSinger.name);
+    if (matchedSinger) {
+        renderSongs(matchedSinger.songs);
+    }
+
+}
 
 
 
