@@ -743,7 +743,7 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
     flex-direction: column;
 }
 
-.playlist-data .detail .playlist-name {
+.playlist-data .detail .playlist-owner-name {
     font-size: 3.2rem;
     font-weight: 700;
 }

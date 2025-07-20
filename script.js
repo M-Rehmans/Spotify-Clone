@@ -11,13 +11,13 @@ const volumIcon = document.querySelector('.volume-icon');
 const homeBtn = document.querySelector('.home-btn')
 const itemContainerItems = document.querySelectorAll('.item-box');
 const playlistList = document.querySelectorAll('.playlist-item');
-const songList = document.querySelector(".singer's-song-list")
+const songList = document.querySelector(".singer-song-list");
 
 playlistList.forEach((playlistName, index) => {
     playlistName.addEventListener('click', () => {
         itemCardsHide();
         let matchFound = false;
-        let matchedSinger = singers.find(singer => singer.name.toLowerCase() === playlistName.id.toLowerCase());
+        // let matchedSinger = singers.find(singer => singer.name.toLowerCase() === playlistName.id.toLowerCase());
         itemContainerItems.forEach(item => {
             if (playlistName.id === item.id) {
                 console.log(item.id);
@@ -44,43 +44,52 @@ function itemCardsHide() {
 }
 
 
-function createSongList(){
-
-}
+// function createSongList(){
+    
+// }
 
 const musicList = [
     "Media/NASHA.mp3",
     "Media/DO GALLAN.mp3"
 ];
 
-const singers = [
-    {
-        name: 'Atif Aslam',
-        songs: [
-            "Media/Woh Lamhe Woh Baatein.mp3",
-            "Media/Rafta Rafta.mp3",
-            "Media/Sang-e-Mah.mp3",
-            "Media/Tum Nazar Mein Raho.mp3",
-        ]
-    },
+// const singers = [
+//     {
+//         name: 'Atif Aslam',
+//         songs: [
+//             "Media/Woh Lamhe Woh Baatein.mp3",
+//             "Media/Rafta Rafta.mp3",
+//             "Media/Sang-e-Mah.mp3",
+//             "Media/Tum Nazar Mein Raho.mp3",
+//         ]
+//     },
 
-    {
-        name: 'Nusrat',
-        songs: [
-            "Media/Jab Karam Hota Hai Halat Badal Jate Hain.mp3",
-            "Media/Othe Amlan De Hony Ne Navede.mp3",
-            "Media/Unke Andaz e karam.mp3",
-            "Media/Aaj Sik Mitran Di.mp3",
-        ]
-    },
+//     {
+//         name: 'Nusrat',
+//         songs: [
+//             "Media/Jab Karam Hota Hai Halat Badal Jate Hain.mp3",
+//             "Media/Othe Amlan De Hony Ne Navede.mp3",
+//             "Media/Unke Andaz e karam.mp3",
+//             "Media/Aaj Sik Mitran Di.mp3",
+//         ]
+//     },
 
-    {
-        name: 'Talwinder',
-        songs: [
-            "Media/Nasha.mp3",
-        ]
-    }
-]
+//     {
+//         name: 'Talwinder',
+//         songs: [
+//             "Media/Nasha.mp3",
+//         ]
+//     }
+// ]
+
+
+
+
+
+
+
+
+
 
 // card.textContent = song.split('/').pop().replace('.mp3', '');
 
