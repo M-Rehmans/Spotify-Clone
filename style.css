@@ -351,6 +351,7 @@ body {
     gap: 10px;
     padding: 10px;
     border-radius: 10px;
+    cursor: pointer;
 }
 
 .p-a-l-itemBox:hover {
@@ -447,8 +448,10 @@ body {
     cursor: pointer;
 }
 
+
 .home-secto {
     flex-direction: column;
+    /* display: flex; */
 }
 
 .home-secto .bg-gradient-box {
@@ -459,6 +462,55 @@ body {
 
 .item-box{
     display: none;
+}
+
+
+.item-box.active{
+    display: flex;
+}
+
+#Emptyplaylist .emptyImage{
+    width: 60%;
+}
+
+.Emptyplaylist {
+    /* width: 60%; */
+    /* text-align: center; */
+    /* display: flex; */
+    align-items: center;
+    justify-content: center;
+    padding-top: 30px;
+    position: relative;
+}
+
+.Emptyplaylist p{
+    position: absolute;
+    bottom: 40px;
+    font-size: 2rem;
+    background-color: red;
+    padding: 2px;
+    color: white;
+    animation: flashColors 2s infinite;
+}
+
+#Emptyplaylist>:last-child{
+    bottom: 0px;
+    font-size: 1.5rem;
+}
+
+@keyframes flashColors {
+  0% {
+    background-color: red;
+    color: white;
+  }
+  50% {
+    background-color: rgb(255, 255, 255);
+    color: black;
+  }
+  100% {
+    background-color: red;
+    color: white;
+  }
 }
 
 .h-s-top-btns>button:hover {

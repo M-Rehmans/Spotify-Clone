@@ -28,7 +28,7 @@
                 </div>
             </div>
             <div class="middle-box flex">
-                <button class="btn btn-light home-btn flex">
+                <button class="btn btn-light home-btn flex playlist-item" id="home">
                     <img src="Media/Vector 1.svg" alt="">
                     <!-- <img src="Media/Vector 1h.svg" alt=""> -->
                 </button>
@@ -77,12 +77,12 @@
                 </div>
 
                 <div class="playlists-artists-list">
-                    <div class="p-a-l-itemBox playlist-item flex">
+                    <div class="p-a-l-itemBox playlist-item flex" id="Nusrat">
                         <div class="palib-img">
-                            <img src="Media/Momina Mustehsan.jpg" alt="">
+                            <img src="Media/Nusrat Fateh Ali Khan.jpg" alt="Nusrat Fateh Ali Khan">
                         </div>
                         <div class="palib-innerbox flex">
-                            <h1 class="palib-item-name">Momina Mostehsan</h1>
+                            <h1 class="palib-item-name">Nusrat Fateh Ali</h1>
                             <div class="palib-item-info flex">
                                 <p class="palitem-title">Artist</p>
                                 <span>&bull;</span>
@@ -90,12 +90,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-a-l-itemBox artist-item flex">
+                    <div class="p-a-l-itemBox playlist-item flex" id="Atif-aslam">
                         <div class="palib-img">
-                            <img src="Media/Momina Mustehsan.jpg" alt="">
+                            <img src="Media/Atif Aslam.jpg" alt="">
                         </div>
                         <div class="palib-innerbox flex">
-                            <h1 class="palib-item-name">Momina Mostehsan</h1>
+                            <h1 class="palib-item-name">Atif Aslam</h1>
                             <div class="palib-item-info flex">
                                 <p class="palitem-title">Artist</p>
                                 <span>&bull;</span>
@@ -103,25 +103,12 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-a-l-itemBox artist-item flex">
+                    <div class="p-a-l-itemBox playlist-item flex" id="Talwinder">
                         <div class="palib-img">
-                            <img src="Media/Momina Mustehsan.jpg" alt="">
+                            <img src="Media/Talwinder.jpg" alt="">
                         </div>
                         <div class="palib-innerbox flex">
-                            <h1 class="palib-item-name">Momina Mostehsan</h1>
-                            <div class="palib-item-info flex">
-                                <p class="palitem-title">Artist</p>
-                                <span>&bull;</span>
-                                <p class="palib-total-songs">10 songs</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-a-l-itemBox artist-item flex">
-                        <div class="palib-img">
-                            <img src="Media/Momina Mustehsan.jpg" alt="">
-                        </div>
-                        <div class="palib-innerbox flex">
-                            <h1 class="palib-item-name">Momina Mostehsan</h1>
+                            <h1 class="palib-item-name">Talwinder</h1>
                             <div class="palib-item-info flex">
                                 <p class="palitem-title">Artist</p>
                                 <span>&bull;</span>
@@ -142,7 +129,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-a-l-itemBox artist-item flex">
+                    <div class="p-a-l-itemBox playlist-item flex">
                         <div class="palib-img">
                             <img src="Media/Momina Mustehsan.jpg" alt="">
                         </div>
@@ -155,7 +142,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-a-l-itemBox artist-item flex">
+                    <div class="p-a-l-itemBox playlist-item flex">
                         <div class="palib-img">
                             <img src="Media/Momina Mustehsan.jpg" alt="">
                         </div>
@@ -168,7 +155,20 @@
                             </div>
                         </div>
                     </div>
-                    <div class="p-a-l-itemBox artist-item flex">
+                    <div class="p-a-l-itemBox playlist-item flex">
+                        <div class="palib-img">
+                            <img src="Media/Momina Mustehsan.jpg" alt="">
+                        </div>
+                        <div class="palib-innerbox flex">
+                            <h1 class="palib-item-name">Momina Mostehsan</h1>
+                            <div class="palib-item-info flex">
+                                <p class="palitem-title">Artist</p>
+                                <span>&bull;</span>
+                                <p class="palib-total-songs">10 songs</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-a-l-itemBox playlist-item flex">
                         <div class="palib-img">
                             <img src="Media/Momina Mustehsan.jpg" alt="">
                         </div>
@@ -199,7 +199,7 @@
 
             <div class="item-container">
                 <!-- <div class="bg-gradient"> -->
-                <div class="home-secto flex item-box ">
+                <div class="home-secto flex item-box active" id="home">
                     <div class="bg-gradient-box flex">
                         <div class="h-s-top-btns flex">
                             <button class="h-s-all-items active">All</button>
@@ -342,18 +342,74 @@
                 </div>
                 <!-- </div> -->
 
-                <div class="playlist-view flex item-box">
+                <div class="playlist-view flex item-box" id="Nusrat">
                     <div class="top-view flex">
                         <div class="playlist-data flex">
-                            <div class="playlist-thumbnail"><img src="Media/Momina Mustehsan.jpg" alt=""></div>
+                            <div class="playlist-thumbnail"><img src="Media/Nusrat Fateh Ali Khan.jpg" alt=""></div>
                             <div class="detail flex">
                                 <p class="title">Playlist</p>
-                                <div class="playlist-name">Momina Mostehsan</div>
+                                <div class="playlist-owner-name">Nusrat Fateh Ali Khan</div>
                                 <p class="lsitners-count">2,344,365 monthly listners</p>
                             </div>
                         </div>
                         <div class="playlist-tool-box flex">
-                            <i class="fa-solid fa-circle-play"></i>
+                            <i class="fa-solid fa-circle-play" id="play-all"></i>
+                            <!-- <i class="fa-solid fa-circle-pause"></i> -->
+                            <div class="current-song-thumbnail-box flex">
+                                <img src="Media/Nasha By Talwinder.jpg" alt="" id="current-song-img">
+                            </div>
+                            <i class="fa-solid fa-shuffle"></i>
+                        </div>
+                        <p class="popular">Popular</p>
+                    </div>
+                    <div class="song-list-playlist flex">
+
+
+                        <div class="song-card flex active">
+                            <div class="song-detail flex">
+                                <span class="song-index">1</span>
+                                <i class="fa-solid fa-play"></i>
+                                <!-- <i class="fa-solid fa-pause"></i> -->
+                                <div class="song-thumbnail flex">
+                                    <img src="Media/Momina Mustehsan.jpg" alt="">
+                                </div>
+                                <p class="song-name">Anwari</p>
+                            </div>
+                            <p class="play-count">97,901,449</p>
+                            <div class="song-duration">5:30</div>
+                        </div>
+
+
+
+                        <div class="song-card flex">
+                            <div class="song-detail flex">
+                                <span class="song-index">1</span>
+                                <i class="fa-solid fa-play"></i>
+                                <!-- <i class="fa-solid fa-pause"></i> -->
+                                <div class="song-thumbnail flex">
+                                    <img src="Media/Momina Mustehsan.jpg" alt="">
+                                </div>
+                                <p class="song-name">Anwari</p>
+                            </div>
+                            <p class="play-count">97,901,449</p>
+                            <div class="song-duration">5:30</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="playlist-view flex item-box" id="Atif-aslam">
+                    <div class="top-view flex">
+                        <div class="playlist-data flex">
+                            <div class="playlist-thumbnail"><img src="Media/Atif Aslam.jpg" alt=""></div>
+                            <div class="detail flex">
+                                <p class="title">Playlist</p>
+                                <div class="playlist-owner-name">Atif Aslam</div>
+                                <p class="lsitners-count">2,344,365 monthly listners</p>
+                            </div>
+                        </div>
+                        <div class="playlist-tool-box flex">
+                            <i class="fa-solid fa-circle-play" id="play-all"></i>
                             <!-- <i class="fa-solid fa-circle-pause"></i> -->
                             <div class="current-song-thumbnail-box flex">
                                 <img src="Media/Nasha By Talwinder.jpg" alt="" id="current-song-img">
@@ -394,6 +450,66 @@
                         </div>
                     </div>
 
+                </div>
+
+                <div class="playlist-view flex item-box" id="Talwinder">
+                    <div class="top-view flex">
+                        <div class="playlist-data flex">
+                            <div class="playlist-thumbnail"><img src="Media/Talwinder.jpg" alt=""></div>
+                            <div class="detail flex">
+                                <p class="title">Playlist</p>
+                                <div class="playlist-owner-name">Talwinder</div>
+                                <p class="lsitners-count">2,344,365 monthly listners</p>
+                            </div>
+                        </div>
+                        <div class="playlist-tool-box flex">
+                            <i class="fa-solid fa-circle-play" id="play-all"></i>
+                            <!-- <i class="fa-solid fa-circle-pause"></i> -->
+                            <div class="current-song-thumbnail-box flex">
+                                <img src="Media/Nasha By Talwinder.jpg" alt="" id="current-song-img">
+                            </div>
+                            <i class="fa-solid fa-shuffle"></i>
+                        </div>
+                        <p class="popular">Popular</p>
+                    </div>
+                    <div class="song-list-playlist flex">
+                        <div class="song-card flex active">
+                            <div class="song-detail flex">
+                                <span class="song-index">1</span>
+                                <i class="fa-solid fa-play"></i>
+                                <!-- <i class="fa-solid fa-pause"></i> -->
+                                <div class="song-thumbnail flex">
+                                    <img src="Media/Momina Mustehsan.jpg" alt="">
+                                </div>
+                                <p class="song-name">Anwari</p>
+                            </div>
+                            <p class="play-count">97,901,449</p>
+                            <div class="song-duration">5:30</div>
+                        </div>
+
+
+
+                        <div class="song-card flex">
+                            <div class="song-detail flex">
+                                <span class="song-index">1</span>
+                                <i class="fa-solid fa-play"></i>
+                                <!-- <i class="fa-solid fa-pause"></i> -->
+                                <div class="song-thumbnail flex">
+                                    <img src="Media/Momina Mustehsan.jpg" alt="">
+                                </div>
+                                <p class="song-name">Anwari</p>
+                            </div>
+                            <p class="play-count">97,901,449</p>
+                            <div class="song-duration">5:30</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="playlist-view flex Emptyplaylist item-box " id="Emptyplaylist">
+                    <img src="Media/chuhat.webp" alt="" class="emptyImage">
+                    <p class="emptyText">Assalamu Alaikum</p>
+                    <p>This playlist is Empty.</p>
                 </div>
             </div>
 
@@ -488,6 +604,8 @@
                 </div>
             </div>
         </div>
+
+        <img src="Media/Nasha.mp3" alt="">
     </div>
     <script src="script.js"></script>
 </body>
