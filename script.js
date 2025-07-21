@@ -101,7 +101,7 @@ function renderSongs(songs) {
         const songNameL = song.split('/').pop().replace('.mp3', '');
         // console.log(`Geooo ${songNameL}`);
         // console.log(songList.id)
-        let songSrcForDuration = `Media/${songNameL}.mp3`
+        // let songSrc = `Media/${songNameL}.mp3`
         // console.log(songSrcForDuration)
         // let songDuration = formatTime(songSrcForDuration.duration);
         // console.log(songDuration);
@@ -125,13 +125,23 @@ function renderSongs(songs) {
         const songCards = document.querySelectorAll('.song-card');
 
         songCards.forEach(songCard => {
+            const durationBox = songCard.querySelector('.song-duration');
+            // console.log(durationBox);
+            let songSrc = `Media/${songCard.getAttribute('data-info')}.mp3`;
+            console.log(songSrc)
+            const tempAudio = new Audio(songSrc);
+            tempAudio.addEventListener('loadedmetadata', () => {
+                const duration = formatTime(tempAudio.duration);
+                durationBox.textContent = duration;
+            });
+
             songCard.addEventListener('click', () => {
                 const songName = songCard.getAttribute('data-info');
                 // console.log("Clicked song:", songName);
                 // console.log("yulo")
-                 audioPlayer.src = `Media/${songName}.mp3`;
-                 console.log(audioPlayer.src);
-                 playAudio()
+                audioPlayer.src = `Media/${songName}.mp3`;
+                console.log(audioPlayer.src);
+                playAudio()
                 // audioPlayer.src = currentSong;
                 // console.log(`Ge ${audioPlayer.src}`)
                 // console.log();
@@ -179,7 +189,7 @@ console.log(`Firstttt ${currentSong}`)
 
 function playAudio() {
     console.log(`Helooooo ${audioPlayer.src}`);
-    if (!playBtnIcon.classList.contains('fa-play')){
+    if (!playBtnIcon.classList.contains('fa-play')) {
         audioPlayer.pause();
         playBtnIcon.classList.remove('fa-pause');
         playBtnIcon.classList.add('fa-play');
