@@ -788,8 +788,8 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
 
 .song-list-playlist{
     /* width: 100%; */
-    border: 1px solid red;
     padding: 20px;
+    gap: 2px;
     flex-direction: column;
 }
 
@@ -799,6 +799,7 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
     justify-content: space-between;
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
+    cursor: pointer;
 }
 
 .song-detail{
@@ -1168,4 +1169,11 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
 
 .volume-icon {
     cursor: pointer;
+}
+
+
+.color-white{
+    color: white;
+    font-size: 3rem;
+    display: flex;
 }

@@ -11,7 +11,10 @@ const volumIcon = document.querySelector('.volume-icon');
 const homeBtn = document.querySelector('.home-btn')
 const itemContainerItems = document.querySelectorAll('.item-box');
 const playlistList = document.querySelectorAll('.playlist-item');
-const songList = document.querySelector(".singer-song-list");
+// const songList = document.querySelector(".singer-song-list");
+let songList;
+
+// const songCards = document.querySelectorAll('.song-card');
 
 playlistList.forEach((playlistName, index) => {
     playlistName.addEventListener('click', () => {
@@ -19,7 +22,10 @@ playlistList.forEach((playlistName, index) => {
         let matchFound = false;
         // let matchedSinger = singers.find(singer => singer.name.toLowerCase() === playlistName.id.toLowerCase());
         itemContainerItems.forEach(item => {
+
             if (playlistName.id === item.id) {
+                songList = item.querySelector(".singer-song-list");
+                // console.log(`Yelloooo ${songList}`)
                 // console.log(item.id);
                 item.classList.add('active');
                 createSongList(item.id);
@@ -49,11 +55,13 @@ function itemCardsHide() {
 
 // }
 
-const musicList = [
-    "Media/NASHA.mp3",
-    "Media/DO GALLAN.mp3"
-];
+// const musicList = [
+//     "Media/NASHA.mp3",
+//     "Media/DO GALLAN.mp3"
+// ];
 
+let currentSong;
+// let currentSong = 'Media/NASHA.mp3';
 const singers = [
     {
         name: 'Nusrat',
@@ -89,15 +97,21 @@ function renderSongs(songs) {
     songList.innerHTML = ''; // Clear previous songs
 
     songs.forEach((song, index) => {
+
         const songNameL = song.split('/').pop().replace('.mp3', '');
-        console.log(`Geooo ${songNameL}`);
+        // console.log(`Geooo ${songNameL}`);
+        // console.log(songList.id)
+        let songSrcForDuration = `Media/${songNameL}.mp3`
+        // console.log(songSrcForDuration)
+        // let songDuration = formatTime(songSrcForDuration.duration);
+        // console.log(songDuration);
         songList.innerHTML += `
-        <div class="song-card flex active">
+        <div class="song-card flex active" data-info="${songNameL}">
             <div class="song-detail flex">
                 <span class="song-index">${index + 1}</span>
                 <i class="fa-solid fa-play"></i>
                 <div class="song-thumbnail flex">
-                    <img src="Media/Momina Mustehsan.jpg" alt="">
+                    <img src="Media/${songNameL}.jpg" alt="">
                 </div>
                 <p class="song-name">${songNameL}</p>
             </div>
@@ -105,22 +119,52 @@ function renderSongs(songs) {
             <div class="song-duration">5:30</div>
         </div>
         `;
+
+
+
+        const songCards = document.querySelectorAll('.song-card');
+
+        songCards.forEach(songCard => {
+            songCard.addEventListener('click', () => {
+                const songName = songCard.getAttribute('data-info');
+                // console.log("Clicked song:", songName);
+                // console.log("yulo")
+                 audioPlayer.src = `Media/${songName}.mp3`;
+                 console.log(audioPlayer.src);
+                 playAudio()
+                // audioPlayer.src = currentSong;
+                // console.log(`Ge ${audioPlayer.src}`)
+                // console.log();
+            });
+        });
+
     });
 }
 
+// songCards.forEach(songCard =>{
+//     songCard.addEventListener('click', ()=>{
+//         // if(songCard.id)
+//         // console.log(songCard.getAttribute('data-info'));
+//         console.log("Toue")
+//     })
+// })
 
 
 function createSongList(singerid) {
     const matchedSinger = singers.find(singer => singer.name === singerid);
     // console.log(matchedSinger.name);
+    // console.log(singerid)
     if (matchedSinger) {
         renderSongs(matchedSinger.songs);
     }
-
+    // else {
+    //     console.log('No match for:', singerid);
+    //     songList.innerHTML = '<p class="color-white">97,901,449</p>';
+    // }
 }
 
 
-
+console.log(`Firstttt ${currentSong}`)
 
 
 
@@ -130,15 +174,33 @@ function createSongList(singerid) {
 
 // card.textContent = song.split('/').pop().replace('.mp3', '');
 
-let currentIndex = 0;
-audioPlayer.src = musicList[currentIndex];
+
+// let currentIndex = 0;
 
 function playAudio() {
+    console.log(`Helooooo ${audioPlayer.src}`);
+    if (!playBtnIcon.classList.contains('fa-play')){
+        audioPlayer.pause();
+        playBtnIcon.classList.remove('fa-pause');
+        playBtnIcon.classList.add('fa-play');
+    }
     if (playBtnIcon.classList.contains('fa-play')) {
         audioPlayer.play();
         playBtnIcon.classList.remove('fa-play');
         playBtnIcon.classList.add('fa-pause');
-    } else {
+    }
+}
+
+
+function playBtnPaue() {
+    console.log("Yup")
+    console.log(`Helooooo ${audioPlayer.src}`);
+    if (playBtnIcon.classList.contains('fa-play')) {
+        audioPlayer.play();
+        playBtnIcon.classList.remove('fa-play');
+        playBtnIcon.classList.add('fa-pause');
+    }
+    else {
         audioPlayer.pause();
         playBtnIcon.classList.remove('fa-pause');
         playBtnIcon.classList.add('fa-play');
@@ -155,7 +217,7 @@ audioPlayer.addEventListener('ended', () => {
 });
 
 
-playBtn.addEventListener('click', playAudio);
+playBtn.addEventListener('click', playBtnPaue);
 
 audioDetailBox.addEventListener('click', () => {
     currentAudioBox.classList.toggle('show-box');
