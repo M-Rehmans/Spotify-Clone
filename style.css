@@ -460,16 +460,16 @@ body {
 
 }
 
-.item-box{
+.item-box {
     display: none;
 }
 
 
-.item-box.active{
+.item-box.active {
     display: flex;
 }
 
-#Emptyplaylist .emptyImage{
+#Emptyplaylist .emptyImage {
     width: 60%;
 }
 
@@ -483,7 +483,7 @@ body {
     position: relative;
 }
 
-.Emptyplaylist p{
+.Emptyplaylist p {
     position: absolute;
     bottom: 40px;
     font-size: 2rem;
@@ -493,24 +493,26 @@ body {
     animation: flashColors 2s infinite;
 }
 
-#Emptyplaylist>:last-child{
+#Emptyplaylist>:last-child {
     bottom: 0px;
     font-size: 1.5rem;
 }
 
 @keyframes flashColors {
-  0% {
-    background-color: red;
-    color: white;
-  }
-  50% {
-    background-color: rgb(255, 255, 255);
-    color: black;
-  }
-  100% {
-    background-color: red;
-    color: white;
-  }
+    0% {
+        background-color: red;
+        color: white;
+    }
+
+    50% {
+        background-color: rgb(255, 255, 255);
+        color: black;
+    }
+
+    100% {
+        background-color: red;
+        color: white;
+    }
 }
 
 .h-s-top-btns>button:hover {
@@ -719,7 +721,7 @@ body {
     flex-direction: column;
 
     background: #de7571;
-background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 1) 90%);
+    background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 1) 90%);
 }
 
 .playlist-data {
@@ -754,7 +756,7 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
     color: white;
 }
 
-.current-song-thumbnail-box{
+.current-song-thumbnail-box {
     width: 40px;
     height: 50px;
     overflow: hidden;
@@ -764,7 +766,7 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
     /* border: 1px solid red; */
 }
 
-.current-song-thumbnail-box img{
+.current-song-thumbnail-box img {
     object-fit: cover;
     width: 100%;
     border-radius: 3px;
@@ -786,14 +788,14 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
     margin-top: 20px;
 }
 
-.song-list-playlist{
+.song-list-playlist {
     /* width: 100%; */
     padding: 20px;
     gap: 2px;
     flex-direction: column;
 }
 
-.song-list-playlist .song-card{
+.song-list-playlist .song-card {
     padding: 10px 15px;
     align-items: center;
     justify-content: space-between;
@@ -802,38 +804,41 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
     cursor: pointer;
 }
 
-.song-detail{
+.song-detail {
     position: relative;
 }
 
-.song-card .song-detail .fa-solid{
+.song-card .song-detail .fa-solid {
     display: none;
     position: absolute;
 
 }
 
-.song-list-playlist .song-card:hover{
+.song-list-playlist .song-card:hover {
     background-color: rgba(87, 87, 87, 0.212);
-    .song-index{
+
+    .song-index {
         /* display: none; */
         opacity: 0;
     }
-    .fa-play{
+
+    .fa-play {
         display: block;
     }
 }
 
-.song-list-playlist .song-card.active{
+.song-list-playlist .song-card.active {
     background-color: rgba(87, 87, 87, 0.397);
+    
 }
 
-.song-list-playlist .song-card .song-detail{
+.song-list-playlist .song-card .song-detail {
     align-items: center;
     gap: 20px;
     color: white;
 }
 
-.song-list-playlist .song-card .song-thumbnail{
+.song-list-playlist .song-card .song-thumbnail {
     width: 40px;
     height: 40px;
     overflow: hidden;
@@ -841,7 +846,7 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
     margin-left: 15px;
 }
 
-.song-card .song-thumbnail img{
+.song-card .song-thumbnail img {
     width: 100%;
     object-fit: cover;
 
@@ -1172,8 +1177,55 @@ background: linear-gradient(180deg, rgba(222, 117, 113, 1) 1%, rgba(18, 18, 18, 
 }
 
 
-.color-white{
+.color-white {
     color: white;
     font-size: 3rem;
     display: flex;
+}
+
+
+
+.music-bars {
+    display: flex;
+    align-items: flex-end;
+    height: 25px;
+    gap: 4px;
+    position: absolute;
+}
+
+.bar {
+    width: 4px;
+    height: 90%;
+    background: #1db954;
+    /* Spotify green */
+    animation: bounce 1s infinite ease-in-out;
+    border-radius: 2px;
+}
+
+.bar:nth-child(1) {
+    animation-delay: 0.3s;
+}
+
+.bar:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.bar:nth-child(3) {
+    animation-delay: 0.7s;
+}
+
+.bar:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes bounce {
+
+    0%,
+    100% {
+        height: 20%;
+    }
+
+    50% {
+        height: 100%;
+    }
 }

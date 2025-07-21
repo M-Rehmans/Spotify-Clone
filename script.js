@@ -13,7 +13,7 @@ const itemContainerItems = document.querySelectorAll('.item-box');
 const playlistList = document.querySelectorAll('.playlist-item');
 // const songList = document.querySelector(".singer-song-list");
 let songList;
-
+let thumbnail;
 // const songCards = document.querySelectorAll('.song-card');
 
 playlistList.forEach((playlistName, index) => {
@@ -25,12 +25,10 @@ playlistList.forEach((playlistName, index) => {
 
             if (playlistName.id === item.id) {
                 songList = item.querySelector(".singer-song-list");
-                // console.log(`Yelloooo ${songList}`)
-                // console.log(item.id);
+                thumbnail = item.querySelector('#current-song-img');
                 item.classList.add('active');
                 createSongList(item.id);
                 matchFound = true;
-                // console.log(matchedSinger.name);
             }
         });
         const emptyBox = document.getElementById('Emptyplaylist');
@@ -93,18 +91,13 @@ const singers = [
 
 
 
-function renderSongs(songs) {
+function renderSongs(songs, singerIdentity) {
     songList.innerHTML = ''; // Clear previous songs
 
     songs.forEach((song, index) => {
 
         const songNameL = song.split('/').pop().replace('.mp3', '');
-        // console.log(`Geooo ${songNameL}`);
-        // console.log(songList.id)
-        // let songSrc = `Media/${songNameL}.mp3`
-        // console.log(songSrcForDuration)
-        // let songDuration = formatTime(songSrcForDuration.duration);
-        // console.log(songDuration);
+     
         songList.innerHTML += `
         <div class="song-card flex active" data-info="${songNameL}">
             <div class="song-detail flex">
@@ -123,12 +116,9 @@ function renderSongs(songs) {
 
 
         const songCards = document.querySelectorAll('.song-card');
-
         songCards.forEach(songCard => {
             const durationBox = songCard.querySelector('.song-duration');
-            // console.log(durationBox);
             let songSrc = `Media/${songCard.getAttribute('data-info')}.mp3`;
-            console.log(songSrc)
             const tempAudio = new Audio(songSrc);
             tempAudio.addEventListener('loadedmetadata', () => {
                 const duration = formatTime(tempAudio.duration);
@@ -137,14 +127,29 @@ function renderSongs(songs) {
 
             songCard.addEventListener('click', () => {
                 const songName = songCard.getAttribute('data-info');
-                // console.log("Clicked song:", songName);
-                // console.log("yulo")
+                const currentPlayingCard = document.querySelector('#current-playing-view');
+                const currentSongDetail = document.querySelector('#Played-Song');
+                let currentSongName = currentSongDetail.querySelector('.song-name');
+                let currentSingerName = currentSongDetail.querySelector('.singer-name');
+                let currentSongImg = currentSongDetail.querySelector('img');
+                let currentSongNameCPC = currentPlayingCard.querySelectorAll('.song-name');
+                let currentSongImgCPC = currentPlayingCard.querySelector('img');
+                let currentSingerNameCPC = currentPlayingCard.querySelector('.artist-name');
+                currentSongNameCPC.forEach(eachTag => {
+                    eachTag.textContent = songName;
+                })
+                currentSongImgCPC.src = `Media/${songName}.jpg`;
+                currentSingerNameCPC.textContent = singerIdentity;
+                thumbnail.src = `Media/${songName}.jpg`;
+
+
+                currentSongImg.src = `Media/${songName}.jpg`;
+                currentSongName.textContent = songName;
+                currentSingerName.textContent = singerIdentity;
+               
                 audioPlayer.src = `Media/${songName}.mp3`;
-                console.log(audioPlayer.src);
                 playAudio()
-                // audioPlayer.src = currentSong;
-                // console.log(`Ge ${audioPlayer.src}`)
-                // console.log();
+                
             });
         });
 
@@ -154,27 +159,23 @@ function renderSongs(songs) {
 // songCards.forEach(songCard =>{
 //     songCard.addEventListener('click', ()=>{
 //         // if(songCard.id)
-//         // console.log(songCard.getAttribute('data-info'));
-//         console.log("Toue")
+//         
 //     })
 // })
 
 
 function createSongList(singerid) {
     const matchedSinger = singers.find(singer => singer.name === singerid);
-    // console.log(matchedSinger.name);
-    // console.log(singerid)
+
     if (matchedSinger) {
-        renderSongs(matchedSinger.songs);
+        renderSongs(matchedSinger.songs, matchedSinger.name);
     }
     // else {
-    //     console.log('No match for:', singerid);
     //     songList.innerHTML = '<p class="color-white">97,901,449</p>';
     // }
 }
 
 
-console.log(`Firstttt ${currentSong}`)
 
 
 
@@ -188,7 +189,6 @@ console.log(`Firstttt ${currentSong}`)
 // let currentIndex = 0;
 
 function playAudio() {
-    console.log(`Helooooo ${audioPlayer.src}`);
     if (!playBtnIcon.classList.contains('fa-play')) {
         audioPlayer.pause();
         playBtnIcon.classList.remove('fa-pause');
@@ -203,8 +203,7 @@ function playAudio() {
 
 
 function playBtnPaue() {
-    console.log("Yup")
-    console.log(`Helooooo ${audioPlayer.src}`);
+   
     if (playBtnIcon.classList.contains('fa-play')) {
         audioPlayer.play();
         playBtnIcon.classList.remove('fa-play');
