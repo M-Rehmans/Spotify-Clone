@@ -1114,6 +1114,10 @@ body {
     font-size: 16px;
 }
 
+.bottom-shuffle.active{
+    color: green;
+}
+
 .progress-container {
     display: flex;
     align-items: center;

@@ -11,9 +11,16 @@ const volumIcon = document.querySelector('.volume-icon');
 const homeBtn = document.querySelector('.home-btn')
 const itemContainerItems = document.querySelectorAll('.item-box');
 const playlistList = document.querySelectorAll('.playlist-item');
+const playPreviousSongBtn = document.querySelector('#previous-song');
+const playNextSongBtn = document.querySelector('#next-song');
+const shuffleBtn = document.querySelector('#shuffle-Songs');
 // const songList = document.querySelector(".singer-song-list");
 let songList;
 let thumbnail;
+let currentSong;
+let currentSongCardBox;
+let isShuffle = false;
+
 // const songCards = document.querySelectorAll('.song-card');
 
 playlistList.forEach((playlistName, index) => {
@@ -58,7 +65,6 @@ function itemCardsHide() {
 //     "Media/DO GALLAN.mp3"
 // ];
 
-let currentSong;
 // let currentSong = 'Media/NASHA.mp3';
 const singers = [
     {
@@ -90,16 +96,19 @@ const singers = [
 ]
 
 
-
+let i = 0;
 function renderSongs(songs, singerIdentity) {
     songList.innerHTML = ''; // Clear previous songs
 
     songs.forEach((song, index) => {
+        if (i > songs.length) {
+            i = 0;
+        }
 
         const songNameL = song.split('/').pop().replace('.mp3', '');
-     
+
         songList.innerHTML += `
-        <div class="song-card flex active" data-info="${songNameL}">
+        <div class="song-card flex active" data-info="${songNameL}" id="${i + 1}">
             <div class="song-detail flex">
                 <span class="song-index">${index + 1}</span>
                 <i class="fa-solid fa-play"></i>
@@ -112,7 +121,7 @@ function renderSongs(songs, singerIdentity) {
             <div class="song-duration">5:30</div>
         </div>
         `;
-
+        i = i + 1;
 
 
         const songCards = document.querySelectorAll('.song-card');
@@ -126,30 +135,36 @@ function renderSongs(songs, singerIdentity) {
             });
 
             songCard.addEventListener('click', () => {
+                // const songName = songCard.getAttribute('data-info');
+                // const currentPlayingCard = document.querySelector('#current-playing-view');
+                // const currentSongDetail = document.querySelector('#Played-Song');
+                // let currentSongName = currentSongDetail.querySelector('.song-name');
+                // let currentSingerName = currentSongDetail.querySelector('.singer-name');
+                // let currentSongImg = currentSongDetail.querySelector('img');
+                // let currentSongNameCPC = currentPlayingCard.querySelectorAll('.song-name');
+                // let currentSongImgCPC = currentPlayingCard.querySelector('img');
+                // let currentSingerNameCPC = currentPlayingCard.querySelector('.artist-name');
+                // currentSongNameCPC.forEach(eachTag => {
+                //     eachTag.textContent = songName;
+                // })
+                // currentSongImgCPC.src = `Media/${songName}.jpg`;
+                // currentSingerNameCPC.textContent = singerIdentity;
+                // thumbnail.src = `Media/${songName}.jpg`;
+                // currentSongImg.src = `Media/${songName}.jpg`;
+                // currentSongName.textContent = songName;
+                // currentSingerName.textContent = singerIdentity;
+
+
+                // If you uncomment upper lines then comment these bottom 2 lines 
                 const songName = songCard.getAttribute('data-info');
-                const currentPlayingCard = document.querySelector('#current-playing-view');
-                const currentSongDetail = document.querySelector('#Played-Song');
-                let currentSongName = currentSongDetail.querySelector('.song-name');
-                let currentSingerName = currentSongDetail.querySelector('.singer-name');
-                let currentSongImg = currentSongDetail.querySelector('img');
-                let currentSongNameCPC = currentPlayingCard.querySelectorAll('.song-name');
-                let currentSongImgCPC = currentPlayingCard.querySelector('img');
-                let currentSingerNameCPC = currentPlayingCard.querySelector('.artist-name');
-                currentSongNameCPC.forEach(eachTag => {
-                    eachTag.textContent = songName;
-                })
-                currentSongImgCPC.src = `Media/${songName}.jpg`;
-                currentSingerNameCPC.textContent = singerIdentity;
-                thumbnail.src = `Media/${songName}.jpg`;
+                updateNowPlayingUI(songName, singerIdentity);
 
 
-                currentSongImg.src = `Media/${songName}.jpg`;
-                currentSongName.textContent = songName;
-                currentSingerName.textContent = singerIdentity;
-               
                 audioPlayer.src = `Media/${songName}.mp3`;
+                currentSong = audioPlayer.src;
+                currentSongCardBox = songCard;
                 playAudio()
-                
+
             });
         });
 
@@ -203,7 +218,7 @@ function playAudio() {
 
 
 function playBtnPaue() {
-   
+    console.log(audioPlayer.src);
     if (playBtnIcon.classList.contains('fa-play')) {
         audioPlayer.play();
         playBtnIcon.classList.remove('fa-play');
@@ -216,13 +231,47 @@ function playBtnPaue() {
     }
 }
 
+
+shuffleBtn.addEventListener('click', () => {
+    isShuffle = !isShuffle;
+    shuffleBtn.classList.toggle('active'); // Optional: highlight when active
+});
+
 audioPlayer.addEventListener('ended', () => {
-    currentIndex++;
-    if (currentIndex >= musicList.length) {
-        currentIndex = 0; // Loop back to first song if needed
+    let songlistIndex = parseInt(currentSongCardBox.id); // Get current ID (as number)
+    let songListIndexPlus = songlistIndex + 1;
+    const totalSongs = songList.querySelectorAll('.song-card').length;
+
+    // Find the next song card using the new ID
+    //     if (songListIndexPlus <= totalSongs) {
+    //         const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
+    //         previousNextPlay(nextSongCard);
+    //     }
+    //     else if (songListIndexPlus > totalSongs) {
+    //         songListIndexPlus = 1;
+    //         const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
+    //         previousNextPlay(nextSongCard);
+    //     }
+
+    if (isShuffle) {
+        // ✅ Shuffle mode
+        let randomIndex;
+        do {
+            randomIndex = Math.floor(Math.random() * totalSongs);
+        } while (parseInt(currentSongCardBox.id) === randomIndex + 1); // Avoid repeating same song
+
+        const randomSongCard = songList.querySelector(`.song-card[id="${randomIndex + 1}"]`);
+        previousNextPlay(randomSongCard);
+    } else {
+        // ✅ Normal mode (play next in order)
+        let songlistIndex = parseInt(currentSongCardBox.id);
+        let nextIndex = songlistIndex + 1;
+
+        if (nextIndex > totalSongs) nextIndex = 1;
+
+        const nextSongCard = songList.querySelector(`.song-card[id="${nextIndex}"]`);
+        previousNextPlay(nextSongCard);
     }
-    audioPlayer.src = musicList[currentIndex];
-    audioPlayer.play();
 });
 
 
@@ -287,3 +336,134 @@ volumIcon.addEventListener('click', () => {
     }
 })
 
+playPreviousSongBtn.addEventListener('click', () => {
+    let songlistIndex = parseInt(currentSongCardBox.id); // Get current ID (as number)
+    let songListIndexPlus = songlistIndex - 1;
+    const totalSongs = songList.querySelectorAll('.song-card').length;
+
+    // Find the next song card using the new ID
+    if (songListIndexPlus == 0) {
+        songListIndexPlus = 1;
+        const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
+        previousNextPlay(nextSongCard);
+    }
+    else {
+        // songListIndexPlus = 1;
+        const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
+        previousNextPlay(nextSongCard);
+    }
+})
+
+playNextSongBtn.addEventListener('click', () => {
+    let songlistIndex = parseInt(currentSongCardBox.id); // Get current ID (as number)
+    let songListIndexPlus = songlistIndex + 1;
+    const totalSongs = songList.querySelectorAll('.song-card').length;
+
+    // Find the next song card using the new ID
+    if (songListIndexPlus <= totalSongs) {
+        const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
+        previousNextPlay(nextSongCard);
+    }
+    else if (songListIndexPlus > totalSongs) {
+        songListIndexPlus = 1;
+        const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
+        previousNextPlay(nextSongCard);
+    }
+
+    console.log(`Index of the song Card ${songListIndexPlus}`);
+    // if (nextSongCard) {
+    //     const nextSongName = nextSongCard.getAttribute('data-info');
+    //     const nextSingerName = nextSongCard.closest('.item-box').id;
+
+    //     updateNowPlayingUI(nextSongName, nextSingerName);
+    //     audioPlayer.src = `Media/${nextSongName}.mp3`;
+    //     currentSong = audioPlayer.src;
+    //     currentSongCardBox = nextSongCard;
+    //     playAudio();
+    // } else {
+    //     console.log("No next song found.");
+    // }
+
+});
+
+function previousNextPlay(previousNext) {
+    if (previousNext) {
+        const nextSongName = previousNext.getAttribute('data-info');
+        const nextSingerName = previousNext.closest('.item-box').id;
+
+        updateNowPlayingUI(nextSongName, nextSingerName);
+        audioPlayer.src = `Media/${nextSongName}.mp3`;
+        currentSong = audioPlayer.src;
+        currentSongCardBox = previousNext;
+        playAudio();
+    } else {
+        console.log("No next song found.");
+    }
+}
+
+function updateNowPlayingUI(songName, singerIdentity) {
+    const currentPlayingCard = document.querySelector('#current-playing-view');
+    const currentSongDetail = document.querySelector('#Played-Song');
+
+    const currentSongName = currentSongDetail.querySelector('.song-name');
+    const currentSingerName = currentSongDetail.querySelector('.singer-name');
+    const currentSongImg = currentSongDetail.querySelector('img');
+
+    const currentSongNameCPC = currentPlayingCard.querySelectorAll('.song-name');
+    const currentSongImgCPC = currentPlayingCard.querySelector('img');
+    const currentSingerNameCPC = currentPlayingCard.querySelector('.artist-name');
+
+    // Update names and images in both views
+    currentSongNameCPC.forEach(eachTag => {
+        eachTag.textContent = songName;
+    });
+
+    currentSongImgCPC.src = `Media/${songName}.jpg`;
+    currentSingerNameCPC.textContent = singerIdentity;
+
+    if (thumbnail) thumbnail.src = `Media/${songName}.jpg`;
+
+    currentSongImg.src = `Media/${songName}.jpg`;
+    currentSongName.textContent = songName;
+    currentSingerName.textContent = singerIdentity;
+}
+
+
+// window.addEventListener('DOMContentLoaded', () => {
+//     // Get the first singer and their first song
+//     const firstSinger = singers[0];
+//     if (firstSinger && firstSinger.songs.length > 0) {
+//         const firstSong = firstSinger.songs[0];
+//         const songName = firstSong.split('/').pop().replace('.mp3', '');
+
+//         // Set initial audio source
+//         audioPlayer.src = firstSong;
+// // createSongList(firstSinger.name);
+
+//         // Update song details visually
+//         const currentPlayingCard = document.querySelector('#current-playing-view');
+//         const currentSongDetail = document.querySelector('#Played-Song');
+//         let currentSongName = currentSongDetail.querySelector('.song-name');
+//         let currentSingerName = currentSongDetail.querySelector('.singer-name');
+//         let currentSongImg = currentSongDetail.querySelector('img');
+//         let currentSongNameCPC = currentPlayingCard.querySelectorAll('.song-name');
+//         let currentSongImgCPC = currentPlayingCard.querySelector('img');
+//         let currentSingerNameCPC = currentPlayingCard.querySelector('.artist-name');
+
+//         currentSongName.textContent = songName;
+//         currentSingerName.textContent = firstSinger.name;
+//         currentSongImg.src = `Media/${songName}.jpg`;
+
+//         currentSongNameCPC.forEach(each => {
+//             each.textContent = songName;
+//         });
+//         currentSongImgCPC.src = `Media/${songName}.jpg`;
+//         currentSingerNameCPC.textContent = firstSinger.name;
+
+//         // Optionally preload the song duration info
+//         audioPlayer.addEventListener('loadedmetadata', () => {
+//             progressBar.max = audioPlayer.duration;
+//             totalDurationSpan.textContent = formatTime(audioPlayer.duration);
+//         });
+//     }
+// });
