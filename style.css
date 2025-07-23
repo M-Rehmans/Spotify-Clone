@@ -354,9 +354,10 @@ body {
     cursor: pointer;
 }
 
-.p-a-l-itemBox:hover {
+.p-a-l-itemBox:hover, .p-a-l-itemBox.active {
     background-color: var(--light-item-hover-bg);
 }
+
 
 .palib-img {
     width: 45px;

@@ -19,17 +19,20 @@ let songList;
 let thumbnail;
 let currentSong;
 let currentSongCardBox;
+let activeCard;
 let isShuffle = false;
+
 
 // const songCards = document.querySelectorAll('.song-card');
 
 playlistList.forEach((playlistName, index) => {
+
     playlistName.addEventListener('click', () => {
         itemCardsHide();
         let matchFound = false;
         // let matchedSinger = singers.find(singer => singer.name.toLowerCase() === playlistName.id.toLowerCase());
         itemContainerItems.forEach(item => {
-
+            activeCurrentCard(); // current card active even the change the playlist...
             if (playlistName.id === item.id) {
                 songList = item.querySelector(".singer-song-list");
                 thumbnail = item.querySelector('#current-song-img');
@@ -108,7 +111,7 @@ function renderSongs(songs, singerIdentity) {
         const songNameL = song.split('/').pop().replace('.mp3', '');
 
         songList.innerHTML += `
-        <div class="song-card flex active" data-info="${songNameL}" id="${i + 1}">
+        <div class="song-card flex" data-info="${songNameL}" id="${i + 1}">
             <div class="song-detail flex">
                 <span class="song-index">${index + 1}</span>
                 <i class="fa-solid fa-play"></i>
@@ -157,8 +160,9 @@ function renderSongs(songs, singerIdentity) {
 
                 // If you uncomment upper lines then comment these bottom 2 lines 
                 const songName = songCard.getAttribute('data-info');
+                activeCard = songName;
                 updateNowPlayingUI(songName, singerIdentity);
-
+                activeCurrentCard();
 
                 audioPlayer.src = `Media/${songName}.mp3`;
                 currentSong = audioPlayer.src;
@@ -169,6 +173,20 @@ function renderSongs(songs, singerIdentity) {
         });
 
     });
+}
+
+function activeCurrentCard() {
+    const songCards = document.querySelectorAll('.song-card');
+    songCards.forEach(songCard => {
+        const cardDataInfo = songCard.getAttribute('data-info');
+        if (activeCard == cardDataInfo) {
+            // console.log(`active ay vai:${activeCard}....cardDataInfo jy vai ${cardDataInfo}`);
+            songCard.classList.add('active');
+        }
+        else {
+            songCard.classList.remove('active');
+        }
+    })
 }
 
 // songCards.forEach(songCard =>{
@@ -218,7 +236,7 @@ function playAudio() {
 
 
 function playBtnPaue() {
-    console.log(audioPlayer.src);
+    // console.log(audioPlayer.src);
     if (playBtnIcon.classList.contains('fa-play')) {
         audioPlayer.play();
         playBtnIcon.classList.remove('fa-play');
@@ -232,47 +250,58 @@ function playBtnPaue() {
 }
 
 
+// let isShuffle = false; // toggle flag
+// const shuffleBtn = document.getElementById('shuffle-Songs');
+
+// let isShuffle = false;
+let playedSongs = [];
+
+// 🔀 Toggle Shuffle Mode
 shuffleBtn.addEventListener('click', () => {
     isShuffle = !isShuffle;
-    shuffleBtn.classList.toggle('active'); // Optional: highlight when active
+    shuffleBtn.classList.toggle('active');
+    // shuffleBtn.textContent = isShuffle ? "🔀 Shuffle: ON" : "🔀 Shuffle: OFF";
+    playedSongs = []; // Reset played list
 });
 
+// 🎧 Play next on song end
 audioPlayer.addEventListener('ended', () => {
-    let songlistIndex = parseInt(currentSongCardBox.id); // Get current ID (as number)
-    let songListIndexPlus = songlistIndex + 1;
-    const totalSongs = songList.querySelectorAll('.song-card').length;
-
-    // Find the next song card using the new ID
-    //     if (songListIndexPlus <= totalSongs) {
-    //         const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
-    //         previousNextPlay(nextSongCard);
-    //     }
-    //     else if (songListIndexPlus > totalSongs) {
-    //         songListIndexPlus = 1;
-    //         const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
-    //         previousNextPlay(nextSongCard);
-    //     }
+    const allSongs = Array.from(songList.querySelectorAll('.song-card'));
+    const totalSongs = allSongs.length;
 
     if (isShuffle) {
-        // ✅ Shuffle mode
-        let randomIndex;
-        do {
-            randomIndex = Math.floor(Math.random() * totalSongs);
-        } while (parseInt(currentSongCardBox.id) === randomIndex + 1); // Avoid repeating same song
+        const unplayedSongs = allSongs.filter(card => !playedSongs.includes(card.id));
 
-        const randomSongCard = songList.querySelector(`.song-card[id="${randomIndex + 1}"]`);
-        previousNextPlay(randomSongCard);
+        if (unplayedSongs.length === 0) {
+            // Optional: repeat whole playlist or stop
+            playedSongs = [];
+            playBtnPaue();
+            // alert("Shuffle cycle complete. Restarting shuffle.");
+            isShuffle = true;
+            return;
+        }
+
+        const randomIndex = Math.floor(Math.random() * unplayedSongs.length);
+        const nextSongCard = unplayedSongs[randomIndex];
+        activeCard = nextSongCard.getAttribute('data-info');
+        // console.log(`heuu ${activeCard}`)
+        activeCurrentCard();
+        playedSongs.push(nextSongCard.id);
+        previousNextPlay(nextSongCard);
     } else {
-        // ✅ Normal mode (play next in order)
-        let songlistIndex = parseInt(currentSongCardBox.id);
-        let nextIndex = songlistIndex + 1;
-
+        let currentIndex = parseInt(currentSongCardBox.id);
+        let nextIndex = currentIndex + 1;
         if (nextIndex > totalSongs) nextIndex = 1;
-
         const nextSongCard = songList.querySelector(`.song-card[id="${nextIndex}"]`);
+        activeCard = nextSongCard.getAttribute('data-info');
+        // console.log(`heuu ${activeCard}`)
+        activeCurrentCard();
         previousNextPlay(nextSongCard);
     }
 });
+
+
+
 
 
 playBtn.addEventListener('click', playBtnPaue);
@@ -362,11 +391,18 @@ playNextSongBtn.addEventListener('click', () => {
     // Find the next song card using the new ID
     if (songListIndexPlus <= totalSongs) {
         const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
+        // activeCard = nextSongCard.getAttribute('data-info');
+        // console.log(activeCard)
+        // activeCurrentCard();
+
         previousNextPlay(nextSongCard);
     }
     else if (songListIndexPlus > totalSongs) {
         songListIndexPlus = 1;
         const nextSongCard = songList.querySelector(`.song-card[id="${songListIndexPlus}"]`);
+        // activeCard = nextSongCard.getAttribute('data-info');
+        // console.log(activeCard)
+        // activeCurrentCard();
         previousNextPlay(nextSongCard);
     }
 
@@ -389,6 +425,27 @@ playNextSongBtn.addEventListener('click', () => {
 function previousNextPlay(previousNext) {
     if (previousNext) {
         const nextSongName = previousNext.getAttribute('data-info');
+        activeCard = previousNext.getAttribute('data-info');
+        console.log(activeCard)
+        activeCurrentCard();
+        // Testing.....
+
+        const activeSongCard = document.querySelector(`.song-card[data-info="${activeCard}"]`);
+
+        if (activeSongCard) {
+            const grandparentId = activeSongCard.parentElement?.parentElement?.id;
+            // console.log("Grandparent ID:", grandparentId);
+            playlistList.forEach(playlistCard=>{
+                    // playlistCard.classList.remove('active');
+                if(grandparentId==playlistCard.id){
+                    playlistCard.classList.add('active');
+                    console.log(playlistCard.classList);
+                }
+            })
+        }
+
+        // ....Testing
+
         const nextSingerName = previousNext.closest('.item-box').id;
 
         updateNowPlayingUI(nextSongName, nextSingerName);
