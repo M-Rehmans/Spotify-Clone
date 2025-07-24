@@ -32,6 +32,7 @@ playlistList.forEach((playlistName, index) => {
         let matchFound = false;
         // let matchedSinger = singers.find(singer => singer.name.toLowerCase() === playlistName.id.toLowerCase());
         itemContainerItems.forEach(item => {
+            activePlaylistCard(activeCard);
             activeCurrentCard(); // current card active even the change the playlist...
             if (playlistName.id === item.id) {
                 songList = item.querySelector(".singer-song-list");
@@ -162,6 +163,7 @@ function renderSongs(songs, singerIdentity) {
                 const songName = songCard.getAttribute('data-info');
                 activeCard = songName;
                 updateNowPlayingUI(songName, singerIdentity);
+                activePlaylistCard(activeCard);
                 activeCurrentCard();
 
                 audioPlayer.src = `Media/${songName}.mp3`;
@@ -285,6 +287,7 @@ audioPlayer.addEventListener('ended', () => {
         const nextSongCard = unplayedSongs[randomIndex];
         activeCard = nextSongCard.getAttribute('data-info');
         // console.log(`heuu ${activeCard}`)
+        activePlaylistCard(activeCard);
         activeCurrentCard();
         playedSongs.push(nextSongCard.id);
         previousNextPlay(nextSongCard);
@@ -422,27 +425,34 @@ playNextSongBtn.addEventListener('click', () => {
 
 });
 
-function previousNextPlay(previousNext) {
-    if (previousNext) {
-        const nextSongName = previousNext.getAttribute('data-info');
-        activeCard = previousNext.getAttribute('data-info');
-        console.log(activeCard)
-        activeCurrentCard();
-        // Testing.....
-
-        const activeSongCard = document.querySelector(`.song-card[data-info="${activeCard}"]`);
+function activePlaylistCard(curretnCard){
+    const activeSongCard = document.querySelector(`.song-card[data-info="${curretnCard}"]`);
 
         if (activeSongCard) {
             const grandparentId = activeSongCard.parentElement?.parentElement?.id;
             // console.log("Grandparent ID:", grandparentId);
             playlistList.forEach(playlistCard=>{
-                    // playlistCard.classList.remove('active');
+                    playlistCard.classList.remove('active');
                 if(grandparentId==playlistCard.id){
                     playlistCard.classList.add('active');
                     console.log(playlistCard.classList);
                 }
             })
         }
+}
+
+
+function previousNextPlay(previousNext) {
+    if (previousNext) {
+        const nextSongName = previousNext.getAttribute('data-info');
+        activeCard = previousNext.getAttribute('data-info');
+        // console.log(activeCard)
+        
+        activeCurrentCard();
+        activePlaylistCard(activeCard);
+        // Testing.....
+
+        
 
         // ....Testing
 
