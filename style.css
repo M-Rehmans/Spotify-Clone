@@ -23,15 +23,102 @@ body {
 }
 
 .mian-container {
-    width: 99%;
+    /* width: 99%; */
     height: 98.2vh;
     background-color: var(--black-bg);
     padding: 5px;
     position: relative;
     overflow: hidden;
     flex-direction: column;
-
 }
+
+/* Testing */
+
+.absoButton {
+    position: fixed;
+    top: 100px;
+    right: -5px;
+    z-index: 9999;
+}
+
+#show-toggle {
+    /* position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999; */
+
+    padding: 10px;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    /* place-items: center; */
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--light-items);
+    background: var(--light-item-bg);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    transition: all 0.3s ease;
+}
+
+/* Shine animation */
+#show-toggle::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(120deg,
+            transparent,
+            rgba(255, 255, 255, 0.15),
+            transparent);
+    transform: skewX(-25deg);
+}
+
+/* Shine sweep */
+@keyframes shine {
+    0% {
+        left: -75%;
+    }
+
+    100% {
+        left: 125%;
+    }
+}
+
+#show-toggle:hover::before {
+    animation: shine 1s ease forwards;
+}
+
+/* Hover lift */
+#show-toggle:hover {
+    color: white;
+    background: var(--light-item-hover-bg);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.1);
+}
+
+/* Press in */
+#show-toggle:active {
+    transform: scale(0.96);
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.08);
+}
+
+
+
+
+/* Testing */
+
+
+
 
 .top-nav {
     /* background-color: var(--light-bg); */
@@ -69,8 +156,8 @@ body {
 }
 
 .home-btn {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
     padding: 10px;
     border-radius: 50px;
     background-color: var(--light-bg);
@@ -88,11 +175,12 @@ body {
     justify-content: center;
     align-items: center;
     position: relative;
+    padding: 5px 0px;
 }
 
 .search-input {
     /* position: relative; */
-    padding: 18px 120px 18px 60px;
+    padding: 10px 120px 10px 60px;
     border: none;
     outline: none;
     border-radius: 50px;
@@ -101,7 +189,6 @@ body {
     font-size: 1.1rem;
     color: white;
     font-family: "Poppins", sans-serif;
-
 }
 
 .search-box .search-input::placeholder {
@@ -136,14 +223,7 @@ body {
 }
 
 
-.right-box {
-    gap: 40px;
-    align-items: center;
-}
 
-.right-box i {
-    font-size: 1.2rem;
-}
 
 .user-account-icon {
     width: 40px;
@@ -151,19 +231,21 @@ body {
     border-radius: 50px;
     /* border: 8px solid rgba(128, 128, 128, 0.295); */
     background-color: rgba(128, 128, 128, 0.37);
-    font-size: 1.1rem;
     padding: 8px;
+    align-items: center;
+    justify-content: center;
 }
 
-.right-box .user-name {
+.top-nav .user-name {
     background-color: #19E68C;
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 80%;
     display: flex;
     align-items: center;
     justify-content: center;
     /* margin: 5px; */
     border-radius: 50px;
+    font-size: 1rem;
 
 }
 
@@ -183,6 +265,7 @@ body {
     /* overflow: hidden; */
     flex-direction: column;
 }
+
 
 .S-top {
     justify-content: space-between;
@@ -310,6 +393,9 @@ body {
     scrollbar-width: none;
     /* Firefox */
     -ms-overflow-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     /* IE and Edge */
 }
 
@@ -341,7 +427,7 @@ body {
     /* Show on hover */
 }
 
-.playlists-artists-list:hover {
+.playlists-artists-list {
     scrollbar-color: rgba(211, 211, 211, 0.4) transparent;
     scrollbar-width: thin;
 }
@@ -352,10 +438,35 @@ body {
     padding: 10px;
     border-radius: 10px;
     cursor: pointer;
+    position: relative;
 }
 
-.p-a-l-itemBox:hover, .p-a-l-itemBox.active {
-    background-color: var(--light-item-hover-bg);
+.p-a-l-itemBox .active-pv-bar {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    right: 15px;
+    display: none;
+}
+
+
+
+.p-a-l-itemBox:hover {
+    background-color: rgba(87, 87, 87, 0.164);
+}
+
+.p-a-l-itemBox.openBox {
+    background-color: rgba(87, 87, 87, 0.397);
+}
+
+.p-a-l-itemBox.active {
+    /* background-color: rgba(87, 87, 87, 0.397); */
+    border: 1px solid rgba(117, 117, 117, 0.308);
+
+    .active-pv-bar {
+        display: block;
+    }
 }
 
 
@@ -384,6 +495,17 @@ body {
     color: white;
 }
 
+.singerEllipse {
+    white-space: nowrap;
+    /* Text ek hi line me rahe */
+    overflow: hidden;
+    /* Extra text hide ho jaye */
+    text-overflow: ellipsis;
+    /* "..." show kare */
+    width: 100%;
+    /* padding-right: 10px; */
+}
+
 .palib-item-info {
     font-size: 0.85rem;
     gap: 3px;
@@ -402,8 +524,8 @@ body {
 
 .item-container {
     border-radius: 10px;
-    /* width: 100%; */
-    width: 60%;
+    width: 100%;
+    /* min-width: 60%; */
     padding: 0px 0px 30px 0px;
     /* Remove this width and make 100% */
     /* height: 80vh; */
@@ -440,7 +562,6 @@ body {
     padding: 10px 15px;
     border-radius: 50px;
     font-size: 0.9rem;
-    /* From https://css.glass */
     background: rgba(255, 255, 255, 0.2);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(5px);
@@ -453,6 +574,22 @@ body {
 .home-secto {
     flex-direction: column;
     /* display: flex; */
+    position: relative;
+}
+
+.absolute-Element {
+    position: fixed;
+    z-index: 90;
+    background-color: #19e68d5b;
+    top: 37%;
+    /* transform: translateX(50%); */
+    /* font-size: 3rem; */
+    font-size: clamp(1.5rem, 1.2rem + 1.5vw, 3rem);
+
+}
+
+.absolute-Element p {
+    color: #000000c4;
 }
 
 .home-secto .bg-gradient-box {
@@ -650,9 +787,6 @@ body {
 }
 
 .m-f-u-card-list {
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* gap: 10px; */
     overflow-x: auto;
     overflow-y: hidden;
     white-space: nowrap;
@@ -714,6 +848,7 @@ body {
 /* Playlist View */
 .playlist-view {
     flex-direction: column;
+    container-type: inline-size;
 }
 
 .playlist-view .top-view {
@@ -733,13 +868,11 @@ body {
 
 .playlist-thumbnail {
     width: 200px;
-    height: 200px;
-    overflow: hidden;
-    border-radius: 50%;
 }
 
 .playlist-thumbnail img {
     width: 100%;
+    border-radius: 50%;
 }
 
 .playlist-data .detail {
@@ -747,7 +880,7 @@ body {
 }
 
 .playlist-data .detail .playlist-owner-name {
-    font-size: 3.2rem;
+    /* font-size: 3.2rem; */
     font-weight: 700;
 }
 
@@ -797,12 +930,27 @@ body {
 }
 
 .song-list-playlist .song-card {
-    padding: 10px 15px;
-    align-items: center;
-    justify-content: space-between;
+    /* padding: 10px 15px; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
     border-radius: 4px;
     transition: all 0.2s ease-in-out;
-    cursor: pointer;
+    /* cursor: pointer; */
+    display: grid;
+    grid-template-columns: 480px 1fr 120px 60px;
+    /* 40px for index/icon, 
+       1fr for song name (takes remaining space),
+       120px for play count,
+       60px for duration */
+    align-items: center;
+    padding: 8px 12px;
+    border-bottom: 1px solid #31313160;
+    gap: 10px;
+
+}
+
+.setGrid {
+    grid-template-columns: 1fr 1fr;
 }
 
 .song-detail {
@@ -812,8 +960,43 @@ body {
 .song-card .song-detail .fa-solid {
     display: none;
     position: absolute;
-
 }
+
+.song-card .play-count.hideElement {
+    display: none;
+}
+
+.song-card .cardSongName {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 160px;
+    /* prevent text overflow */
+}
+
+.song-duration {
+    justify-self: flex-end;
+}
+
+/* When the container is 800px or wider */
+@container (min-width: 500px) {
+    .playlist-data .detail .playlist-owner-name {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+}
+
+@container (min-width: 800px) {
+
+    /* .h-s-cards {
+        grid-template-columns: repeat(4, 1fr);
+    } */
+    .playlist-data .detail .playlist-owner-name {
+        font-size: 3.2rem;
+        font-weight: 700;
+    }
+}
+
 
 .song-list-playlist .song-card:hover {
     background-color: rgba(87, 87, 87, 0.212);
@@ -823,14 +1006,30 @@ body {
         opacity: 0;
     }
 
-    .fa-play {
+    .fa-solid {
         display: block;
+    }
+
+    .active-volume-bar {
+        opacity: 0;
     }
 }
 
+
+
 .song-list-playlist .song-card.active {
     background-color: rgba(87, 87, 87, 0.397);
-    
+    border: 1px solid rgba(117, 117, 117, 0.308);
+}
+
+.song-card.active:hover {
+    .fa-solid {
+        display: none;
+    }
+
+    .active-volume-bar {
+        opacity: 1;
+    }
 }
 
 .song-list-playlist .song-card .song-detail {
@@ -853,9 +1052,27 @@ body {
 
 }
 
+.song-index {
+    position: relative;
+    opacity: 1;
+}
 
+.song-index.active {
+    opacity: 0;
+}
 
+.active-volume-bar {
+    position: absolute;
+    width: 15px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    display: none;
+}
 
+.active-volume-bar.active {
+    display: block;
+}
 
 
 
@@ -868,15 +1085,16 @@ body {
 
 .now-playing-view {
     background-color: var(--light-bg);
-    width: 40%;
-    height: 67%;
+    width: 50%;
+    height: 65%;
     overflow: hidden;
     display: none;
     flex-direction: column;
+    padding-bottom: 50px;
 }
 
 .now-playing-view.show-box {
-    display: flex;
+    display: block;
 }
 
 
@@ -885,8 +1103,6 @@ body {
     padding: 25px 20px 10px;
     align-items: center;
     justify-content: flex-start;
-    /* gap: 20px; */
-    /* position: relative; */
     transition: all 0.4s ease;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
@@ -918,6 +1134,17 @@ body {
     /* border: 1px solid red; */
 }
 
+.ellipsis {
+    white-space: nowrap;
+    /* Text ek hi line me rahe */
+    overflow: hidden;
+    /* Extra text hide ho jaye */
+    text-overflow: ellipsis;
+    /* "..." show kare */
+    width: 40%;
+    padding-right: 10px;
+}
+
 .now-playing-view:hover .npv-top-nav>.fa-door-open {
     transform: translateX(0);
     opacity: 1;
@@ -942,6 +1169,9 @@ body {
 
 .npv-content .song-thumbnail {
     margin: 0px 0px 22px 0px;
+    max-width: 420px;
+    height: 280px;
+    display: flex;
 }
 
 .npv-content .song-thumbnail img {
@@ -953,9 +1183,22 @@ body {
 }
 
 .npv-content-detail {
-    align-items: center;
-    justify-content: space-between;
+    /* display: grid; */
+    /* grid-template-columns: 1fr 1fr; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    display: list-item;
 
+}
+
+.npv-content-detail .ellipsisText {
+    white-space: nowrap;
+    /* Text ek hi line me rahe */
+    overflow: hidden;
+    /* Extra text hide ho jaye */
+    text-overflow: ellipsis;
+    /* "..." show kare */
+    width: 50%;
 }
 
 .npv-content-detail .icons {
@@ -965,6 +1208,7 @@ body {
     align-items: center;
     cursor: pointer;
     position: relative;
+    justify-content: end;
 }
 
 .npv-content-detail>.icons>.fa-solid:hover {
@@ -1025,7 +1269,7 @@ body {
 .bottom-box {
     width: 98.7%;
     /* height: 100px; */
-    position: absolute;
+    position: fixed;
     bottom: 0px;
     align-items: center;
     justify-content: space-between;
@@ -1066,6 +1310,17 @@ body {
     text-decoration: none;
 }
 
+.bottomEcllipse {
+    white-space: nowrap;
+    /* Text ek hi line me rahe */
+    overflow: hidden;
+    /* Extra text hide ho jaye */
+    text-overflow: ellipsis;
+    /* "..." show kare */
+    width: 190px;
+    /* padding-right: 10px; */
+}
+
 .song-pic-name-playlist-btns .icons {
     color: var(--light-items);
     gap: 15px;
@@ -1099,6 +1354,11 @@ body {
     gap: 20px;
 }
 
+i {
+    cursor: pointer;
+}
+
+
 .play-btn {
     width: 40px;
     height: 40px;
@@ -1108,6 +1368,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    cursor: pointer;
+
 }
 
 .play-btn i {
@@ -1115,7 +1377,7 @@ body {
     font-size: 16px;
 }
 
-.bottom-shuffle.active{
+.bottom-shuffle.active {
     color: green;
 }
 
@@ -1233,4 +1495,225 @@ body {
     50% {
         height: 100%;
     }
+}
+
+.hideItemJS.active {
+    display: none;
+}
+
+.hideInTablet {
+    display: none;
+}
+
+.widthMax {
+    width: 80px;
+}
+
+.widthMin {
+    width: 80px;
+}
+
+.fullScreenWidth {
+    width: 100%;
+}
+
+
+.NotWorking.activate {
+    border: 1px solid red;
+    color: red;
+}
+
+.InMobileScreen {
+    display: none;
+}
+
+
+@media screen and (max-width: 768px) {
+    .side-bar {
+        height: 68vh;
+        background-color: var(--light-bg);
+        border-radius: 10px;
+        padding: 8px;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .buttons {
+        gap: 20px;
+    }
+
+    .play-btn {
+        width: 30px;
+        height: 30px;
+    }
+
+    .play-btn i {
+        font-size: 12px;
+    }
+
+    .progress-container {
+        width: 70%;
+    }
+
+    .volume-box,
+    .volume-show {
+        display: none;
+    }
+
+    .song-list-playlist .song-card {
+        grid-template-columns: 1.5fr 0.3fr;
+    }
+
+    .play-count {
+        display: none;
+    }
+
+    .playlist-thumbnail {
+        width: 140px;
+    }
+
+
+    .top-nav {
+        padding: 1px 20px;
+        margin-bottom: 4px;
+    }
+
+    .top-nav .left-box {
+        font-size: 1.1rem;
+    }
+
+
+
+    .home-btn {
+        width: 50px;
+        height: 50px;
+        padding: 8px;
+    }
+
+    .right-box {
+        gap: 40px;
+        /* border: 1px solid red; */
+        align-items: center;
+    }
+
+    .right-box i {
+        font-size: 1.2rem;
+        color: whitesmoke;
+    }
+
+    .user-account-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 50px;
+        /* border: 8px solid rgba(128, 128, 128, 0.295); */
+        background-color: rgba(128, 128, 128, 0.37);
+        font-size: 1.1rem;
+        padding: 8px;
+    }
+
+    .right-box .user-name {
+        background-color: #19E68C;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        /* margin: 5px; */
+        border-radius: 50px;
+
+    }
+
+    .music-controls {
+        width: 50%;
+    }
+
+    .progress-container {
+        width: 100%;
+    }
+
+    .bottomEcllipse {
+        /* white-space: nowrap; */
+        /* Text ek hi line me rahe */
+        /* overflow: hidden; */
+        /* Extra text hide ho jaye */
+        /* text-overflow: ellipsis; */
+        /* "..." show kare */
+        width: 120px;
+        /* padding-right: 10px; */
+    }
+
+    .absolute-Element {
+        position: fixed;
+        z-index: 90;
+        background-color: #19e68d5b;
+        top: 37%;
+        /* font-size: clamp(1.5rem, 1rem + 1.5vw, 3rem); */
+
+    }
+
+    .playlist-owner-name {
+        white-space: nowrap;
+        /* Text ek hi line me rahe */
+        overflow: hidden;
+        /* Extra text hide ho jaye */
+        text-overflow: ellipsis;
+        /* "..." show kare */
+        width: 90%;
+        font-size: 1.7rem;
+
+    }
+}
+
+@media screen and (max-width: 426px) {
+    .mian-container {
+        display: none;
+    }
+
+    .InMobileScreen {
+        display: flex;
+        /* flex-direction: column; */
+    }
+
+    /* Background video container */
+    .video-background {
+        position: fixed;
+        /* Stays fixed even when scrolling */
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        /* Hides overflow */
+        z-index: -1;
+        /* Push video behind content */
+    }
+
+    /* Make video cover the whole screen */
+    .video-background video {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        /* Ensures no black bars */
+    }
+
+    /* Content styling */
+    .content {
+        position: relative;
+        z-index: 1;
+        /* Make sure it's above video */
+        background-color: #000000ce;
+        color: white;
+        text-align: center;
+        /* padding-top: 20%; */
+        padding: 10px 2px;
+        width: 100%;
+        
+    }
+
+
+
 }
